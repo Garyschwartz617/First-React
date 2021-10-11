@@ -1,10 +1,18 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 
 const Home = () => {
     
     // let name = 'Gary';
     const [name, setName] =useState('Gary');
     const [age, setAge] =useState(25);
+
+    const [blogs,setBlogs] = useState([
+        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
+        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
+        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
+    
+    ])
 
     const handleClick = () => {
         setName('Adina');
@@ -20,7 +28,7 @@ const Home = () => {
 
     return ( 
         <div className="home">
-            <h2> HomePage</h2>
+                <BlogList blogs={blogs} title = "All Blogs!"/>
             <p>{name} is { age}  years old</p>
             <button onClick={handleClick}> Click me</button>
             <button onClick={(e) => handleClick2('Gary', e)}> Click me again</button>
