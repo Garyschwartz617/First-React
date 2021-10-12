@@ -8,7 +8,7 @@ const Home = () => {
     const [age, setAge] =useState(25);
 
     const [blogs,setBlogs] = useState(null)
-
+    const [isPending,setIsPending] =useState(true)
 
     // const handleDelete = (id) => {
     //     const newBlogs = blogs.filter(blog => blog.id != id);
@@ -22,7 +22,12 @@ const Home = () => {
         })
         .then(data => {
             setBlogs(data)
+            setIsPending(false)
         })
+        .catch(err =>{
+            
+        })
+        
         console.log('use effect ran')
         console.log(name)
     }, []);
@@ -45,8 +50,9 @@ const Home = () => {
 
     return ( 
         <div className="home">
-                {blogs &&<BlogList blogs={blogs} title = "All Blogs!" />}
-                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === 'mario')} title = "Marios' blog!"/>}
+            { isPending && <div>Loading...</div>}    
+            {blogs &&<BlogList blogs={blogs} title = "All Blogs!" />}
+            {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === 'mario')} title = "Marios' blog!"/>}
             <button onClick={() => setName('luigi')}>Change name</button>
             <p>{name} is { age}  years old</p>
             <button onClick={handleClick}> Click me</button>
